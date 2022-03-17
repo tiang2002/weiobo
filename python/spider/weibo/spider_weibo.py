@@ -31,6 +31,16 @@ def get_res(url, cookie):
     # return None
 
 
+def parse(html):
+    pass
+
+
+def get_user_comment(url, cookie):
+    res = get_res(url, cookie)
+
+    parse(res.text)
+
+
 def save_people_url():
     """保存搜索中用户的个人信息网址"""
     pass
@@ -72,18 +82,11 @@ def get_topic(key_word='每天啥都不想干怎么办', page=2,
         print(html.xpath('//*[@id="pl_feedlist_index"]/div[4]/div[1]/div[2]/div[1]/div[2]/p[2]/text()'))
         # xpath语句定位
         user_url = html.xpath('//*[@id="scroller"]/div[1]/div[6]/div/article/div/header/div[1]/div/div[2]/a')
+        # xpath匹配用户的详细界面
+        get_user_comment(user_url, cookie)
+
         save_people_url()
         save_text()
-
-
-def parse(html):
-    pass
-
-
-def get_user_comment(url, cookie):
-    res = get_res(url, cookie)
-
-    parse(res.text)
 
 
 get_topic()
