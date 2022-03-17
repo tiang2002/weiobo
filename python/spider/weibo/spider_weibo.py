@@ -48,10 +48,10 @@ def get_key_word(key_word='每天啥都不想干怎么办', page=2,
         res = get_res(
             'https://s.weibo.com/weibo?q=' + key_word + '&page=' + str(i), cookie)
         # 关键词搜索不用加%23
-        print(res.text)#打印html源码看看（
+        print(res.text)  # 打印html源码看看（
         # with open('test.txt', 'w+', encoding='utf-8') as file:
         #     file.write(res.text)
-        html = etree.HTML(res.text)# lxml解析网页
+        html = etree.HTML(res.text)  # lxml解析网页
         print(html.xpath('//*[@id="pl_feedlist_index"]/div[4]/div[1]/div[2]/div[1]/div[2]/p[2]/text()'))
         # xpath语句定位
         save_people_url()
@@ -71,8 +71,19 @@ def get_topic(key_word='每天啥都不想干怎么办', page=2,
         html = etree.HTML(res.text)
         print(html.xpath('//*[@id="pl_feedlist_index"]/div[4]/div[1]/div[2]/div[1]/div[2]/p[2]/text()'))
         # xpath语句定位
+        user_url = html.xpath('//*[@id="scroller"]/div[1]/div[6]/div/article/div/header/div[1]/div/div[2]/a')
         save_people_url()
         save_text()
+
+
+def parse(html):
+    pass
+
+
+def get_user_comment(url, cookie):
+    res = get_res(url, cookie)
+
+    parse(res.text)
 
 
 get_topic()
