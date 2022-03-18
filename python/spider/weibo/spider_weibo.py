@@ -37,8 +37,13 @@ def parse(html):
 
 def get_user_comment(url, cookie):
     res = get_res(url, cookie)
-
     parse(res.text)
+    res2 = get_res('https://weibo.com/ajax/statuses/show?id=LkgMPADdB', cookie)
+    # id 在返回的字典里
+    comment_url = 'https://weibo.com/ajax/statuses/buildComments?is_reload=1&id=4748310918730567&is_show_bulletin=2&is_mix=0&count=10&uid=1282440983'
+    # 将id取出拼接进comment—_url中， 下一个id在comment_url 的返回字典里
+    # uid 就是https://weibo.com/1282440983/LkgMPADdB 这个评论页面里的这串数字
+    # 其他参数比如count可以改成 20，代表获取20个（搞多了容易出事）
 
 
 def save_people_url():
